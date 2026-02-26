@@ -4,18 +4,24 @@
       <img class="productimage" [src]="currentImage" alt="{{product.name}}">
     </a>
     <div class="buttons">
-      <button class="prevbutton" (click)="prev()"><</button>
-      <button class="nextbutton" (click)="next()">></button>
+      <button class="prevbutton" (click)="prev()">&lt;</button>
+      <button class="nextbutton" (click)="next()">&gt;</button>
     </div>
   </div>
   <div class="description">
-    <h2>{{ product.name }}  </h2>
+    <h2>{{ product.name }}</h2>
     <p>⭐ {{ product.rating }}</p>
     <p>Цена: {{ product.price.toLocaleString('ru-RU') }} ₸</p>
     <details>
       <summary>Описание</summary>
-      <p>{{ product.description }} </p>
+      <p>{{ product.description }}</p>
     </details>
+    <div class="features">
+      <button (click)="like()" [class.liked]="liked">
+  ❤ {{ product.likes }}
+</button>
+      <button (click)="remove()" class="delete">🗑 Удалить</button>
+    </div>
     <div class="icons">
       <a [href]="product.link" target="_blank">
         <img class="icon" src="https://upload.wikimedia.org/wikipedia/ru/a/aa/Logo_of_Kaspi_bank.png" alt="Kaspi">

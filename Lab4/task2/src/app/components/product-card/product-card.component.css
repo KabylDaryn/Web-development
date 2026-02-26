@@ -60,3 +60,8 @@ details p{
   position: relative;
   display: flex; gap: 5px; margin-top: 5px; overflow-x: auto;
 }
+.liked {
+  color: red;
+  border-color: red !important;
+  background: #fff0f0 !important;
+}

@@ -1,1 +1,40 @@
-<product-list></product-list>
+<header class="kaspi-header">
+  <div class="header-inner">
+    <img
+      src="https://s.yimg.com/ny/api/res/1.2/uTpC1tX1P5FqyMckCxRqOQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTQyMDtoPTQyMA--/https://media.zenfs.com/en/globenewswire.com/9bcb93dcaf42227bce3a7584bf3ae720"
+      alt="Kaspi"
+      class="kaspi-logo"
+    />
+    <h1 class="header-tagline">Kaspi.kz</h1>
+  </div>
+</header>
+
+<main class="main-content">
+  <section class="category-section">
+    <h2 class="section-title">Категории</h2>
+    <div class="categories">
+      @for (c of categories; track c.id) {
+        <button
+          (click)="selectCategory(c.id)"
+          [class.selected]="c.id === categoryId"
+          class="category-btn"
+        >
+          <span class="categoryname">{{ c.name }}</span>
+          <span class="categorydesc">{{ c.description }}</span>
+        </button>
+      }
+    </div>
+  </section>
+
+  @if (categoryId === null) {
+    <div class="empty-state">
+      <div class="empty-icon">🛍️</div>
+      <p>Выберите категорию, чтобы посмотреть товары</p>
+    </div>
+  } @else {
+    <product-list
+      [products]="products"
+      (deleteProduct)="onDeleteProduct($event)"
+    ></product-list>
+  }
+</main>

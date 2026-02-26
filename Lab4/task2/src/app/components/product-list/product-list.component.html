@@ -1,3 +1,30 @@
-<div class="products-list" >
-  <product-card *ngFor="let pr of products" [product]="pr"></product-card>
+<div class="list-header">
+  <p class="product-count">{{ products.length }} товаров</p>
+  <div class="sort-controls">
+    <span class="sort-label">Сортировка:</span>
+
+    <button class="sort-btn" [class.active]="sortField === 'name'" (click)="setSort('name')">
+      По названию
+      @if (sortField === 'name') { <span class="sort-arrow">{{ sortAsc ? '↑' : '↓' }}</span> }
+    </button>
+
+    <button class="sort-btn" [class.active]="sortField === 'price'" (click)="setSort('price')">
+      По цене
+      @if (sortField === 'price') { <span class="sort-arrow">{{ sortAsc ? '↑' : '↓' }}</span> }
+    </button>
+
+    <button class="sort-btn" [class.active]="sortField === 'rating'" (click)="setSort('rating')">
+      По рейтингу
+      @if (sortField === 'rating') { <span class="sort-arrow">{{ sortAsc ? '↑' : '↓' }}</span> }
+    </button>
+  </div>
+</div>
+
+@if (sortedProducts.length === 0) {
+  <p class="no-products">Нет продуктов в этой категории</p>
+}
+<div class="products-list">
+  @for (pr of sortedProducts; track pr.id) {
+    <product-card [product]="pr" (delete)="onDelete($event)"></product-card>
+  }
 </div>
